@@ -1,0 +1,17 @@
+<ul class="collection" *ngIf="todos">
+  <li class="collection-item avatar" *ngFor="let todo of todos">
+    <i class="material-icons circle">folder</i>
+    <span class="title">{{ todo.title }}</span>
+    <p>{{ todo.message }}</p>
+    <a class="secondary-content" (click)="deleteTodo(todo)" [routerLink]="">
+      <i class="material-icons">delete</i>
+    </a>
+  </li>
+  <li class="collection-item avatar">
+    <i class="material-icons circle">folder</i>
+    <span class="title">Ajouter un commentaire...</span>
+    <a class="secondary-content" (click)="addTodo()" [routerLink]="">
+      <i class="material-icons">add</i>
+    </a>
+  </li>
+</ul>
