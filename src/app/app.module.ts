@@ -10,7 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {MaterializeModule} from 'angular2-materialize';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './home/home.component';
-import {metaReducers, reducers} from './redux/redux.config';
+import {reducers} from './redux/redux.config';
 import {TodoGuard} from './core/components/services/todo-guard.service';
 import {environment} from '../environments/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
@@ -30,7 +30,7 @@ import {TodosEffects} from './todos/todos.effects';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers),
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([TodosEffects]),
