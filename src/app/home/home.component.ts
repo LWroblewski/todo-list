@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TodoService} from '../core/components/services/todo.service';
 import {Todo} from '../core/components/model/todo.model';
 import {Subscription} from 'rxjs/Subscription';
@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   todoSubscription$: Subscription;
   todos: Todo[];
@@ -28,9 +28,5 @@ export class HomeComponent implements OnInit, OnDestroy {
       title: 'La flemme de faire des inputs',
       message: 'Commentaire fixe'
     });
-  }
-
-  ngOnDestroy(): void {
-    this.todoSubscription$.unsubscribe();
   }
 }

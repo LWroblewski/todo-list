@@ -1,8 +1,7 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, OnInit} from '@angular/core';
-import {MaterializeAction} from 'angular2-materialize';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {TodoService} from '../services/todo.service';
 import {Todo} from '../model/todo.model';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-header',
