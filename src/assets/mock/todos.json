@@ -1,8 +1,10 @@
 [
   {
+    "id": "1",
     "title": "Finir la prez ngrx/mobx",
     "message": "Un peu dans la m****..."
   }, {
+    "id": "2",
     "title": "Acheter des Knaki",
     "message": "Pour manger, tiens!"
   }

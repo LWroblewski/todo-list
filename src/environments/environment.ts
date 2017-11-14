@@ -5,5 +5,7 @@
 
 export const environment = {
   production: false,
+  rehydrate: true,
+  storage: window.sessionStorage,
   urlTodos: './assets/mock/todos.json'
 };

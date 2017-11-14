@@ -1,36 +1,33 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {TodoService} from '../core/components/services/todo.service';
+import {Component, OnInit} from '@angular/core';
 import {Todo} from '../core/components/model/todo.model';
-import {Subscription} from 'rxjs/Subscription';
+import {Store} from '@ngrx/store';
+import {State} from '../redux/redux.config';
+import {Observable} from 'rxjs/Observable';
+import {TodoAddAction, TodoDeleteAction} from '../todos/todos.actions';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
-  todoSubscription$: Subscription;
-  todos: Todo[];
+  todos$: Observable<Todo[]>;
 
-  constructor(private todoService: TodoService) { }
+  constructor(private store: Store<State>) { }
 
   ngOnInit() {
-    this.todoSubscription$ = this.todoService.getTodos()
-      .subscribe(todos => this.todos = todos);
+    this.todos$ = this.store.select(state => state.todos);
   }
 
   deleteTodo(pTodo: Todo) {
-    this.todos = this.todos.filter(todo => pTodo !== todo);
+    this.store.dispatch(new TodoDeleteAction(pTodo.id));
   }
 
   addTodo() {
-    this.todos.push({
+    this.store.dispatch(new TodoAddAction({
+      id: new Date().toString(),
       title: 'La flemme de faire des inputs',
       message: 'Commentaire fixe'
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.todoSubscription$.unsubscribe();
+    }));
   }
 }

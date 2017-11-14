@@ -1,4 +1,4 @@
-<ul class="collection" *ngIf="todos">
+<ul class="collection" *ngIf="todos$ | async as todos">
   <li class="collection-item avatar" *ngFor="let todo of todos">
     <i class="material-icons circle">folder</i>
     <span class="title">{{ todo.title }}</span>
