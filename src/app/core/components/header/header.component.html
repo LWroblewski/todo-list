@@ -3,10 +3,10 @@
     <a href="" class="brand-logo">Todos List</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li>
-        <a href="">
+        <a href="" *mobxAutorun>
           Todos
-          <span *ngIf="todos$ | async as todos" class="new badge">
-            {{ todos.length }}
+          <span class="new badge">
+            {{ todoState.numTodos }}
           </span>
         </a>
       </li>

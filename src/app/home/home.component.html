@@ -1,5 +1,5 @@
-<ul class="collection" *ngIf="todos">
-  <li class="collection-item avatar" *ngFor="let todo of todos">
+<ul class="collection" *mobxAutorun>
+  <li class="collection-item avatar" *ngFor="let todo of todoState.todos">
     <i class="material-icons circle">folder</i>
     <span class="title">{{ todo.title }}</span>
     <p>{{ todo.message }}</p>

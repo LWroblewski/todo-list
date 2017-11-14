@@ -1,36 +1,25 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {TodoService} from '../core/components/services/todo.service';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {TodoState} from '../core/components/stores/todo.store';
 import {Todo} from '../core/components/model/todo.model';
-import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent {
 
-  todoSubscription$: Subscription;
-  todos: Todo[];
-
-  constructor(private todoService: TodoService) { }
-
-  ngOnInit() {
-    this.todoSubscription$ = this.todoService.getTodos()
-      .subscribe(todos => this.todos = todos);
-  }
+  constructor(public todoState: TodoState) { }
 
   deleteTodo(pTodo: Todo) {
-    this.todos = this.todos.filter(todo => pTodo !== todo);
+    this.todoState.deleteTodo(pTodo.id);
   }
 
   addTodo() {
-    this.todos.push({
+    this.todoState.addTodo({
+      id: new Date().toString(),
       title: 'La flemme de faire des inputs',
       message: 'Commentaire fixe'
     });
-  }
-
-  ngOnDestroy(): void {
-    this.todoSubscription$.unsubscribe();
   }
 }

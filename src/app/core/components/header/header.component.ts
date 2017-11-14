@@ -1,8 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, OnInit} from '@angular/core';
-import {MaterializeAction} from 'angular2-materialize';
-import {TodoService} from '../services/todo.service';
-import {Todo} from '../model/todo.model';
-import {Observable} from "rxjs/Observable";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {TodoState} from '../stores/todo.store';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +7,7 @@ import {Observable} from "rxjs/Observable";
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  todos$: Observable<Todo[]>;
-
-  constructor(private todoService: TodoService) {}
-
-  ngOnInit(): void {
-    this.todos$ = this.todoService.getTodos();
-  }
+  constructor(public todoState: TodoState) {}
 }
