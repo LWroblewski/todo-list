@@ -8,17 +8,32 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 @Injectable()
 export class TodoService {
 
-  private _navigate: BehaviorSubject<Navigate>;
+  private _todo: Todo[];
 
-  public get navigate(): BehaviorSubject<Navigate> {
-    return this._navigate;
+  private set todo(value: Todo[]) {
+    this._todo = value;
+    this._todoSubject.next(this._todo);
+  }
+
+  private _todoSubject: BehaviorSubject<Todo[]>;
+
+  public get todos$(): Observable<Todo[]> {
+    return this._todoSubject.asObservable();
   }
 
   constructor(private http: HttpClient) {
-    this.todoSubject  = new BehaviorSubject();
+    this._todoSubject  = new BehaviorSubject(null);
+    this.loadTodos();
   }
 
-  getTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(environment.urlTodos);
+  private loadTodos() {
+    this.http.get<Todo[]>(environment.urlTodos).subscribe(todo => this.todo = todo);
+  }
+
+  public addTodo(pTodo: Todo) {
+    this.todo = [
+      ...this._todo,
+      pTodo
+    ];
   }
 }

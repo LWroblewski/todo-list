@@ -5,7 +5,7 @@
       <li>
         <a href="">
           Todos
-          <span *ngIf="todos$ | async as todos" class="new badge">
+          <span *ngIf="todoService.todos$ | async as todos" class="new badge">
             {{ todos.length }}
           </span>
         </a>

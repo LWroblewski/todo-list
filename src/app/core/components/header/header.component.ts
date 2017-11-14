@@ -1,21 +1,12 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TodoService} from '../services/todo.service';
-import {Todo} from '../model/todo.model';
-import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  todos$: Observable<Todo[]>;
-
-  constructor(private todoService: TodoService) {}
-
-  ngOnInit(): void {
-    this.todos$ = this.todoService.getTodos();
-  }
+  constructor(public todoService: TodoService) {}
 }
