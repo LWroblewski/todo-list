@@ -28,4 +28,5 @@ export function reducer(
 
 export const selectTodoState = createFeatureSelector<State>('todo');
 
+// selectIds,selectEntities, selectAll, selectTotal
 export const { selectAll: selectAllTodos } = todoAdapter.getSelectors(selectTodoState);

@@ -6,7 +6,7 @@ import * as Todos from '../todos/todos.reducer';
 import {environment} from '../../environments/environment';
 
 export interface State {
-  todos: Todo[];
+  todo: Todo[];
   router: RouterReducerState;
 }
 
@@ -18,7 +18,7 @@ export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any, any> {
   return localStorageSync({
-    keys: ['todos'],
+    keys: ['todo'],
     rehydrate: environment.rehydrate,
     storage: environment.storage
   })(reducer);
