@@ -4,6 +4,7 @@ import {Store} from '@ngrx/store';
 import {State} from '../redux/redux.config';
 import {Observable} from 'rxjs/Observable';
 import {TodoAddAction, TodoDeleteAction} from '../todos/todos.actions';
+import {selectAllTodos} from '../todos/todos.reducer';
 
 @Component({
   templateUrl: './home.component.html',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
-    this.todos$ = this.store.select(state => state.todos);
+    this.todos$ = this.store.select(selectAllTodos);
   }
 
   deleteTodo(pTodo: Todo) {

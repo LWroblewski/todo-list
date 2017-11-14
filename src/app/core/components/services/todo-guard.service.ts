@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {State} from '../../../redux/redux.config';
 import {Observable} from 'rxjs/Observable';
-import {getTodos} from '../../../todos/todos.reducer';
+import {selectAllTodos} from '../../../todos/todos.reducer';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
@@ -25,7 +25,7 @@ export class TodoGuard implements CanActivate {
 
   loadTodos(): Observable<any> {
     return this.store
-      .select(getTodos)
+      .select(selectAllTodos)
       .do((todos: Todo[]) => {
         if (!todos || todos.length === 0) {
           this.store.dispatch(new TodosLoadAction());

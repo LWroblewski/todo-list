@@ -23,6 +23,7 @@
     "@angular/router": "^4.0.0",
     "angular2-materialize": "^15.1.9",
     "@ngrx/effects": "^4.0.0",
+    "@ngrx/entity": "^4.0.0",
     "@ngrx/router-store": "^4.0.0",
     "@ngrx/store": "^4.0.0",
     "@ngrx/store-devtools": "^4.0.0",

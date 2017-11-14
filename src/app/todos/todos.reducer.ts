@@ -1,26 +1,31 @@
 import {Todo} from '../core/components/model/todo.model';
 import * as todoActions from './todos.actions';
-import {State} from '../redux/redux.config';
+import { createEntityAdapter, EntityState, EntityAdapter } from '@ngrx/entity';
+import {createFeatureSelector} from '@ngrx/store';
 
-export const initialState: Todo[] = [];
+export interface State extends EntityState<Todo> {}
+
+export const todoAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
+
+export const initialState: State = todoAdapter.getInitialState();
 
 export function reducer(
-  state: Todo[] = initialState,
+  state = initialState,
   action: todoActions.Actions
-): Todo[] {
+) {
   switch (action.type) {
     case todoActions.LOAD_SUCCESS_ACTION:
-      return action.payload;
+      return todoAdapter.addAll(action.payload, state);
     case todoActions.ADD_ACTION:
-      return [
-        ...state,
-        action.payload
-      ];
+      return todoAdapter.addOne(action.payload, state);
     case todoActions.DELETE_ACTION:
-      return state.filter(todo => todo.id !== action.payload);
+      return todoAdapter.removeOne(action.payload, state);
+    // addOne, addMany, addAll, removeOne, removeMany, removeAll, updateOne and  updateMany
     default:
       return state;
   }
 }
 
-export const getTodos = (state: State) => state.todos;
+export const selectTodoState = createFeatureSelector<State>('todo');
+
+export const { selectAll: selectAllTodos } = todoAdapter.getSelectors(selectTodoState);

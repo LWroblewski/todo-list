@@ -10,14 +10,8 @@ export interface State {
   router: RouterReducerState;
 }
 
-export const initialState: State = {
-  todos: [],
-  router: null
-};
-
-export const reducers: ActionReducerMap<State> = {
-  todos: Todos.reducer,
-  router: routerReducer
+export const reducers: ActionReducerMap<any> = {
+  todo: Todos.reducer
 };
 
 export function localStorageSyncReducer(

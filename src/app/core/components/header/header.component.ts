@@ -1,11 +1,9 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, OnInit} from '@angular/core';
-import {MaterializeAction} from 'angular2-materialize';
-import {TodoService} from '../services/todo.service';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Todo} from '../model/todo.model';
-import {Observable} from "rxjs/Observable";
-import {Store} from "@ngrx/store";
-import {State} from "../../../redux/redux.config";
-import {getTodos} from "../../../todos/todos.reducer";
+import {Observable} from 'rxjs/Observable';
+import {Store} from '@ngrx/store';
+import {State} from '../../../redux/redux.config';
+import {selectAllTodos} from '../../../todos/todos.reducer';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +18,6 @@ export class HeaderComponent implements OnInit {
   constructor(private store: Store<State>) {}
 
   ngOnInit(): void {
-    this.todos$ = this.store.select(getTodos);
+    this.todos$ = this.store.select(selectAllTodos);
   }
 }
