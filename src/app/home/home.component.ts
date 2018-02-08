@@ -26,4 +26,9 @@ export class HomeComponent implements OnInit {
       message: 'Commentaire fixe'
     });
   }
+
+  getNumTodos(): number {
+    console.log(this.todos ? this.todos.length : 0);
+    return this.todos ? this.todos.length : 0;
+  }
 }
